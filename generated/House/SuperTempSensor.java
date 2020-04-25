@@ -19,11 +19,13 @@ public interface SuperTempSensor extends com.zeroc.Ice.Object
 {
     int measure(com.zeroc.Ice.Current current);
 
-    void heatHouse(int temp, com.zeroc.Ice.Current current);
+    int heatHouse(int temp, com.zeroc.Ice.Current current);
 
-    void coolHouse(int temp, com.zeroc.Ice.Current current);
+    int coolHouse(int temp, com.zeroc.Ice.Current current);
 
-    void changeTempUnit(String from, String to, com.zeroc.Ice.Current current);
+    void changeTempUnit(com.zeroc.Ice.Current current);
+
+    String showUnit(com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -81,8 +83,11 @@ public interface SuperTempSensor extends com.zeroc.Ice.Object
         int iceP_temp;
         iceP_temp = istr.readInt();
         inS.endReadParams();
-        obj.heatHouse(iceP_temp, current);
-        return inS.setResult(inS.writeEmptyParams());
+        int ret = obj.heatHouse(iceP_temp, current);
+        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
+        ostr.writeInt(ret);
+        inS.endWriteParams(ostr);
+        return inS.setResult(ostr);
     }
 
     /**
@@ -99,8 +104,11 @@ public interface SuperTempSensor extends com.zeroc.Ice.Object
         int iceP_temp;
         iceP_temp = istr.readInt();
         inS.endReadParams();
-        obj.coolHouse(iceP_temp, current);
-        return inS.setResult(inS.writeEmptyParams());
+        int ret = obj.coolHouse(iceP_temp, current);
+        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
+        ostr.writeInt(ret);
+        inS.endWriteParams(ostr);
+        return inS.setResult(ostr);
     }
 
     /**
@@ -113,14 +121,27 @@ public interface SuperTempSensor extends com.zeroc.Ice.Object
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_changeTempUnit(SuperTempSensor obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        String iceP_from;
-        String iceP_to;
-        iceP_from = istr.readString();
-        iceP_to = istr.readString();
-        inS.endReadParams();
-        obj.changeTempUnit(iceP_from, iceP_to, current);
+        inS.readEmptyParams();
+        obj.changeTempUnit(current);
         return inS.setResult(inS.writeEmptyParams());
+    }
+
+    /**
+     * @hidden
+     * @param obj -
+     * @param inS -
+     * @param current -
+     * @return -
+    **/
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_showUnit(SuperTempSensor obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    {
+        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
+        inS.readEmptyParams();
+        String ret = obj.showUnit(current);
+        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
+        ostr.writeString(ret);
+        inS.endWriteParams(ostr);
+        return inS.setResult(ostr);
     }
 
     /** @hidden */
@@ -133,7 +154,8 @@ public interface SuperTempSensor extends com.zeroc.Ice.Object
         "ice_ids",
         "ice_isA",
         "ice_ping",
-        "measure"
+        "measure",
+        "showUnit"
     };
 
     /** @hidden */
@@ -180,6 +202,10 @@ public interface SuperTempSensor extends com.zeroc.Ice.Object
             case 7:
             {
                 return _iceD_measure(this, in, current);
+            }
+            case 8:
+            {
+                return _iceD_showUnit(this, in, current);
             }
         }
 

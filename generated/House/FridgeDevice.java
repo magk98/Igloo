@@ -22,15 +22,19 @@ public class FridgeDevice implements java.lang.Cloneable,
 
     public int temperature;
 
+    public String category;
+
     public FridgeDevice()
     {
         this.name = "";
+        this.category = "";
     }
 
-    public FridgeDevice(String name, int temperature)
+    public FridgeDevice(String name, int temperature, String category)
     {
         this.name = name;
         this.temperature = temperature;
+        this.category = category;
     }
 
     public boolean equals(java.lang.Object rhs)
@@ -58,6 +62,13 @@ public class FridgeDevice implements java.lang.Cloneable,
             {
                 return false;
             }
+            if(this.category != r.category)
+            {
+                if(this.category == null || r.category == null || !this.category.equals(r.category))
+                {
+                    return false;
+                }
+            }
 
             return true;
         }
@@ -71,6 +82,7 @@ public class FridgeDevice implements java.lang.Cloneable,
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::House::FridgeDevice");
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, name);
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, temperature);
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, category);
         return h_;
     }
 
@@ -92,12 +104,14 @@ public class FridgeDevice implements java.lang.Cloneable,
     {
         ostr.writeString(this.name);
         ostr.writeInt(this.temperature);
+        ostr.writeString(this.category);
     }
 
     public void ice_readMembers(com.zeroc.Ice.InputStream istr)
     {
         this.name = istr.readString();
         this.temperature = istr.readInt();
+        this.category = istr.readString();
     }
 
     static public void ice_write(com.zeroc.Ice.OutputStream ostr, FridgeDevice v)
@@ -153,5 +167,5 @@ public class FridgeDevice implements java.lang.Cloneable,
     private static final FridgeDevice _nullMarshalValue = new FridgeDevice();
 
     /** @hidden */
-    public static final long serialVersionUID = 1060399975L;
+    public static final long serialVersionUID = 1214749392L;
 }

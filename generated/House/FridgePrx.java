@@ -17,39 +17,36 @@ package House;
 
 public interface FridgePrx extends com.zeroc.Ice.ObjectPrx
 {
-    default int cool(int temp)
+    default int cool()
     {
-        return cool(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return cool(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default int cool(int temp, java.util.Map<String, String> context)
+    default int cool(java.util.Map<String, String> context)
     {
-        return _iceI_coolAsync(temp, context, true).waitForResponse();
+        return _iceI_coolAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> coolAsync(int temp)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> coolAsync()
     {
-        return _iceI_coolAsync(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_coolAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> coolAsync(int temp, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> coolAsync(java.util.Map<String, String> context)
     {
-        return _iceI_coolAsync(temp, context, false);
+        return _iceI_coolAsync(context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_temp -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_coolAsync(int iceP_temp, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_coolAsync(java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "cool", null, sync, null);
-        f.invoke(true, context, null, ostr -> {
-                     ostr.writeInt(iceP_temp);
-                 }, istr -> {
+        f.invoke(true, context, null, null, istr -> {
                      int ret;
                      ret = istr.readInt();
                      return ret;
@@ -57,39 +54,36 @@ public interface FridgePrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default int heat(int temp)
+    default int heat()
     {
-        return heat(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return heat(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default int heat(int temp, java.util.Map<String, String> context)
+    default int heat(java.util.Map<String, String> context)
     {
-        return _iceI_heatAsync(temp, context, true).waitForResponse();
+        return _iceI_heatAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> heatAsync(int temp)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> heatAsync()
     {
-        return _iceI_heatAsync(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_heatAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> heatAsync(int temp, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> heatAsync(java.util.Map<String, String> context)
     {
-        return _iceI_heatAsync(temp, context, false);
+        return _iceI_heatAsync(context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_temp -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_heatAsync(int iceP_temp, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_heatAsync(java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "heat", null, sync, null);
-        f.invoke(true, context, null, ostr -> {
-                     ostr.writeInt(iceP_temp);
-                 }, istr -> {
+        f.invoke(true, context, null, null, istr -> {
                      int ret;
                      ret = istr.readInt();
                      return ret;

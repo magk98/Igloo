@@ -65,10 +65,10 @@ public class Client
 						break;
 					}
 					if(line.equals("cool")){
-						temp = fridgePrx.cool(temp);
+						temp = fridgePrx.cool();
 					}
 					if(line.equals("heat")){
-						temp = fridgePrx.heat(temp);
+						temp = fridgePrx.heat();
 					}
 					if (line.equals("add"))
 					{

@@ -5,10 +5,10 @@
 module House{
   sequence<string> houseDevices;
 
-    struct myHouse{
+    struct MyHouse{
         houseDevices devices;
         int temperature;
-    }
+    };
 
     struct Cloth{
         string name;
@@ -20,11 +20,12 @@ module House{
     struct FridgeDevice{
         string name;
         int temperature;
+        string category;
     }
 
   interface Fridge{
-    int cool(int temp);
-    int heat(int temp);
+    int cool();
+    int heat();
     int showTemperature();
   };
 
@@ -35,15 +36,17 @@ module House{
 
   interface SuperTempSensor{
     int measure();
-    void heatHouse(int temp);
-    void coolHouse(int temp);
-    void changeTempUnit(string from, string to);
+    int heatHouse(int temp);
+    int coolHouse(int temp);
+    void changeTempUnit();
+    string showUnit();
   };
 
   interface WashingMachine{
     void wash(string mode);
     Clothes takeWashedClothesAfterTime(int minutes);
     void dry(string mode);
+    bool isDone();
   };
 
 };

@@ -15,18 +15,18 @@
 
 package House;
 
-public class myHouse implements java.lang.Cloneable,
+public class MyHouse implements java.lang.Cloneable,
                                 java.io.Serializable
 {
     public String[] devices;
 
     public int temperature;
 
-    public myHouse()
+    public MyHouse()
     {
     }
 
-    public myHouse(String[] devices, int temperature)
+    public MyHouse(String[] devices, int temperature)
     {
         this.devices = devices;
         this.temperature = temperature;
@@ -38,10 +38,10 @@ public class myHouse implements java.lang.Cloneable,
         {
             return true;
         }
-        myHouse r = null;
-        if(rhs instanceof myHouse)
+        MyHouse r = null;
+        if(rhs instanceof MyHouse)
         {
-            r = (myHouse)rhs;
+            r = (MyHouse)rhs;
         }
 
         if(r != null)
@@ -64,18 +64,18 @@ public class myHouse implements java.lang.Cloneable,
     public int hashCode()
     {
         int h_ = 5381;
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::House::myHouse");
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::House::MyHouse");
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, devices);
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, temperature);
         return h_;
     }
 
-    public myHouse clone()
+    public MyHouse clone()
     {
-        myHouse c = null;
+        MyHouse c = null;
         try
         {
-            c = (myHouse)super.clone();
+            c = (MyHouse)super.clone();
         }
         catch(CloneNotSupportedException ex)
         {
@@ -96,7 +96,7 @@ public class myHouse implements java.lang.Cloneable,
         this.temperature = istr.readInt();
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, myHouse v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, MyHouse v)
     {
         if(v == null)
         {
@@ -108,14 +108,14 @@ public class myHouse implements java.lang.Cloneable,
         }
     }
 
-    static public myHouse ice_read(com.zeroc.Ice.InputStream istr)
+    static public MyHouse ice_read(com.zeroc.Ice.InputStream istr)
     {
-        myHouse v = new myHouse();
+        MyHouse v = new MyHouse();
         v.ice_readMembers(istr);
         return v;
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<myHouse> v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, java.util.Optional<MyHouse> v)
     {
         if(v != null && v.isPresent())
         {
@@ -123,7 +123,7 @@ public class myHouse implements java.lang.Cloneable,
         }
     }
 
-    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, myHouse v)
+    static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, MyHouse v)
     {
         if(ostr.writeOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
         {
@@ -133,12 +133,12 @@ public class myHouse implements java.lang.Cloneable,
         }
     }
 
-    static public java.util.Optional<myHouse> ice_read(com.zeroc.Ice.InputStream istr, int tag)
+    static public java.util.Optional<MyHouse> ice_read(com.zeroc.Ice.InputStream istr, int tag)
     {
         if(istr.readOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
         {
             istr.skip(4);
-            return java.util.Optional.of(myHouse.ice_read(istr));
+            return java.util.Optional.of(MyHouse.ice_read(istr));
         }
         else
         {
@@ -146,8 +146,8 @@ public class myHouse implements java.lang.Cloneable,
         }
     }
 
-    private static final myHouse _nullMarshalValue = new myHouse();
+    private static final MyHouse _nullMarshalValue = new MyHouse();
 
     /** @hidden */
-    public static final long serialVersionUID = 692387640L;
+    public static final long serialVersionUID = -209278184L;
 }

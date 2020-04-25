@@ -54,22 +54,22 @@ public interface SuperTempSensorPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default void heatHouse(int temp)
+    default int heatHouse(int temp)
     {
-        heatHouse(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return heatHouse(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void heatHouse(int temp, java.util.Map<String, String> context)
+    default int heatHouse(int temp, java.util.Map<String, String> context)
     {
-        _iceI_heatHouseAsync(temp, context, true).waitForResponse();
+        return _iceI_heatHouseAsync(temp, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> heatHouseAsync(int temp)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> heatHouseAsync(int temp)
     {
         return _iceI_heatHouseAsync(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> heatHouseAsync(int temp, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> heatHouseAsync(int temp, java.util.Map<String, String> context)
     {
         return _iceI_heatHouseAsync(temp, context, false);
     }
@@ -81,31 +81,35 @@ public interface SuperTempSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_heatHouseAsync(int iceP_temp, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_heatHouseAsync(int iceP_temp, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "heatHouse", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "heatHouse", null, sync, null);
+        f.invoke(true, context, null, ostr -> {
                      ostr.writeInt(iceP_temp);
-                 }, null);
+                 }, istr -> {
+                     int ret;
+                     ret = istr.readInt();
+                     return ret;
+                 });
         return f;
     }
 
-    default void coolHouse(int temp)
+    default int coolHouse(int temp)
     {
-        coolHouse(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return coolHouse(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void coolHouse(int temp, java.util.Map<String, String> context)
+    default int coolHouse(int temp, java.util.Map<String, String> context)
     {
-        _iceI_coolHouseAsync(temp, context, true).waitForResponse();
+        return _iceI_coolHouseAsync(temp, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> coolHouseAsync(int temp)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> coolHouseAsync(int temp)
     {
         return _iceI_coolHouseAsync(temp, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> coolHouseAsync(int temp, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.Integer> coolHouseAsync(int temp, java.util.Map<String, String> context)
     {
         return _iceI_coolHouseAsync(temp, context, false);
     }
@@ -117,50 +121,86 @@ public interface SuperTempSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_coolHouseAsync(int iceP_temp, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_coolHouseAsync(int iceP_temp, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "coolHouse", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "coolHouse", null, sync, null);
+        f.invoke(true, context, null, ostr -> {
                      ostr.writeInt(iceP_temp);
-                 }, null);
+                 }, istr -> {
+                     int ret;
+                     ret = istr.readInt();
+                     return ret;
+                 });
         return f;
     }
 
-    default void changeTempUnit(String from, String to)
+    default void changeTempUnit()
     {
-        changeTempUnit(from, to, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        changeTempUnit(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void changeTempUnit(String from, String to, java.util.Map<String, String> context)
+    default void changeTempUnit(java.util.Map<String, String> context)
     {
-        _iceI_changeTempUnitAsync(from, to, context, true).waitForResponse();
+        _iceI_changeTempUnitAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> changeTempUnitAsync(String from, String to)
+    default java.util.concurrent.CompletableFuture<Void> changeTempUnitAsync()
     {
-        return _iceI_changeTempUnitAsync(from, to, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_changeTempUnitAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> changeTempUnitAsync(String from, String to, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Void> changeTempUnitAsync(java.util.Map<String, String> context)
     {
-        return _iceI_changeTempUnitAsync(from, to, context, false);
+        return _iceI_changeTempUnitAsync(context, false);
     }
 
     /**
      * @hidden
-     * @param iceP_from -
-     * @param iceP_to -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_changeTempUnitAsync(String iceP_from, String iceP_to, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_changeTempUnitAsync(java.util.Map<String, String> context, boolean sync)
     {
         com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "changeTempUnit", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
-                     ostr.writeString(iceP_from);
-                     ostr.writeString(iceP_to);
-                 }, null);
+        f.invoke(false, context, null, null, null);
+        return f;
+    }
+
+    default String showUnit()
+    {
+        return showUnit(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default String showUnit(java.util.Map<String, String> context)
+    {
+        return _iceI_showUnitAsync(context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.String> showUnitAsync()
+    {
+        return _iceI_showUnitAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.String> showUnitAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_showUnitAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.String> _iceI_showUnitAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "showUnit", null, sync, null);
+        f.invoke(true, context, null, null, istr -> {
+                     String ret;
+                     ret = istr.readString();
+                     return ret;
+                 });
         return f;
     }
 

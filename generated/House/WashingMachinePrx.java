@@ -129,6 +129,43 @@ public interface WashingMachinePrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
+    default boolean isDone()
+    {
+        return isDone(com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default boolean isDone(java.util.Map<String, String> context)
+    {
+        return _iceI_isDoneAsync(context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.Boolean> isDoneAsync()
+    {
+        return _iceI_isDoneAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<java.lang.Boolean> isDoneAsync(java.util.Map<String, String> context)
+    {
+        return _iceI_isDoneAsync(context, false);
+    }
+
+    /**
+     * @hidden
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Boolean> _iceI_isDoneAsync(java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.Boolean> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "isDone", null, sync, null);
+        f.invoke(true, context, null, null, istr -> {
+                     boolean ret;
+                     ret = istr.readBool();
+                     return ret;
+                 });
+        return f;
+    }
+
     /**
      * Contacts the remote server to verify that the object implements this type.
      * Raises a local exception if a communication error occurs.

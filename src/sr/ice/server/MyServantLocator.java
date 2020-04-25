@@ -8,7 +8,12 @@ import com.zeroc.Ice.UserException;
 public class MyServantLocator implements ServantLocator {
     @Override
     public LocateResult locate(Current current) throws UserException {
-        return null;
+        // Get the object identity. (We use the name member as the database key.)
+        String name = current.id.name;
+
+        // We have the state, instantiate a servant and return it.
+        //
+        return new ServantLocator.LocateResult(new FridgeI(10), null);
     }
 
     @Override

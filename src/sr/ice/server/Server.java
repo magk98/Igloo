@@ -9,12 +9,13 @@ package sr.ice.server;
 // **********************************************************************
 
 import House.Fridge;
+import House.MyHouse;
+import House.SuperTempSensor;
+import House.TempSensor;
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Util;
 import com.zeroc.Ice.ObjectAdapter;
 import com.zeroc.Ice.Identity;
-
-import java.util.Arrays;
 
 public class Server
 {
@@ -28,26 +29,25 @@ public class Server
 			// 1. Inicjalizacja ICE - utworzenie communicatora
 			communicator = Util.initialize(args);
 
-			// 2. Konfiguracja adaptera
-			// METODA 1 (polecana produkcyjnie): Konfiguracja adaptera Adapter1 jest w pliku konfiguracyjnym podanym jako parametr uruchomienia serwera
-			//Ice.ObjectAdapter adapter = communicator.createObjectAdapter("Adapter1");  
-			
 			// METODA 2 (niepolecana, dopuszczalna testowo): Konfiguracja adaptera Adapter1 jest w kodzie �r�d�owym
 			ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
 			// 3. Stworzenie serwanta/serwant�w
-			CalcI calcServant1 = new CalcI();    
-			CalcI calcServant2 = new CalcI();
-			Fridge fridgeServant1 = new FridgeI();
-			MyServantLocator sl = new MyServantLocator();
+			String devices[] = {"fridge", "basic temperature sensor", "super temperature sensor"};
+			MyHouse house = new MyHouse(devices, 22);
+			TempSensor tempServant = new TempSensorI(house);
+			SuperTempSensor superTempServant = new SuperTempSensorI(house);
+			Fridge fridgeServant1 = new FridgeI(10);
+
 			//próba implementacji servant locatora -> not working yet
-			//adapter.addServantLocator(sl, "fridge");
-			//System.out.println(adapter.getLocator());
-			
+			//MyServantLocator sl = new MyServantLocator();
+			//adapter.addServantLocator(sl, "Fridge");
+			//System.out.println(adapter.findServantLocator("Fridge"));
+
 						    
 			// 4. Dodanie wpis�w do tablicy ASM
-			adapter.add(calcServant1, new Identity("calc11", "calc"));
-	        adapter.add(calcServant2, new Identity("calc22", "calc"));
+			adapter.add(tempServant, new Identity("tempBasic", "temp"));
+			adapter.add(superTempServant, new Identity("tempSuper", "temp"));
 	        adapter.add(fridgeServant1, new Identity("fridge1", "fridge"));
 
 	        
@@ -67,7 +67,6 @@ public class Server
 		if (communicator != null)
 		{
 			// Clean up
-			//
 			try
 			{
 				communicator.destroy();

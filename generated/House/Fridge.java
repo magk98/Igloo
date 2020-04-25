@@ -17,9 +17,9 @@ package House;
 
 public interface Fridge extends com.zeroc.Ice.Object
 {
-    int cool(int temp, com.zeroc.Ice.Current current);
+    int cool(com.zeroc.Ice.Current current);
 
-    int heat(int temp, com.zeroc.Ice.Current current);
+    int heat(com.zeroc.Ice.Current current);
 
     int showTemperature(com.zeroc.Ice.Current current);
 
@@ -57,11 +57,8 @@ public interface Fridge extends com.zeroc.Ice.Object
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_cool(Fridge obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        int iceP_temp;
-        iceP_temp = istr.readInt();
-        inS.endReadParams();
-        int ret = obj.cool(iceP_temp, current);
+        inS.readEmptyParams();
+        int ret = obj.cool(current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
         ostr.writeInt(ret);
         inS.endWriteParams(ostr);
@@ -78,11 +75,8 @@ public interface Fridge extends com.zeroc.Ice.Object
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_heat(Fridge obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
     {
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        int iceP_temp;
-        iceP_temp = istr.readInt();
-        inS.endReadParams();
-        int ret = obj.heat(iceP_temp, current);
+        inS.readEmptyParams();
+        int ret = obj.heat(current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
         ostr.writeInt(ret);
         inS.endWriteParams(ostr);
