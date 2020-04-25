@@ -5,10 +5,10 @@ import House.SuperTempSensor;
 import com.zeroc.Ice.Current;
 
 public class SuperTempSensorI implements SuperTempSensor {
-    public MyHouse myHouse;
-    public String unit = "C";
+    private MyHouse myHouse;
+    private String unit = "C";
 
-    public SuperTempSensorI(MyHouse myHouse){
+    SuperTempSensorI(MyHouse myHouse){
         this.myHouse = myHouse;
     }
 

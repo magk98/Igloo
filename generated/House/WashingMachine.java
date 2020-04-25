@@ -17,13 +17,9 @@ package House;
 
 public interface WashingMachine extends com.zeroc.Ice.Object
 {
-    void wash(String mode, com.zeroc.Ice.Current current);
+    Cloth[] wash(String mode, Cloth[] clothes, com.zeroc.Ice.Current current);
 
-    Cloth[] takeWashedClothesAfterTime(int minutes, com.zeroc.Ice.Current current);
-
-    void dry(String mode, com.zeroc.Ice.Current current);
-
-    boolean isDone(com.zeroc.Ice.Current current);
+    String dry(String mode, com.zeroc.Ice.Current current);
 
     /** @hidden */
     static final String[] _iceIds =
@@ -61,27 +57,11 @@ public interface WashingMachine extends com.zeroc.Ice.Object
         com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
         com.zeroc.Ice.InputStream istr = inS.startReadParams();
         String iceP_mode;
+        Cloth[] iceP_clothes;
         iceP_mode = istr.readString();
+        iceP_clothes = ClothesHelper.read(istr);
         inS.endReadParams();
-        obj.wash(iceP_mode, current);
-        return inS.setResult(inS.writeEmptyParams());
-    }
-
-    /**
-     * @hidden
-     * @param obj -
-     * @param inS -
-     * @param current -
-     * @return -
-    **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_takeWashedClothesAfterTime(WashingMachine obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
-    {
-        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        com.zeroc.Ice.InputStream istr = inS.startReadParams();
-        int iceP_minutes;
-        iceP_minutes = istr.readInt();
-        inS.endReadParams();
-        Cloth[] ret = obj.takeWashedClothesAfterTime(iceP_minutes, current);
+        Cloth[] ret = obj.wash(iceP_mode, iceP_clothes, current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
         ClothesHelper.write(ostr, ret);
         inS.endWriteParams(ostr);
@@ -102,24 +82,9 @@ public interface WashingMachine extends com.zeroc.Ice.Object
         String iceP_mode;
         iceP_mode = istr.readString();
         inS.endReadParams();
-        obj.dry(iceP_mode, current);
-        return inS.setResult(inS.writeEmptyParams());
-    }
-
-    /**
-     * @hidden
-     * @param obj -
-     * @param inS -
-     * @param current -
-     * @return -
-    **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_isDone(WashingMachine obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
-    {
-        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
-        inS.readEmptyParams();
-        boolean ret = obj.isDone(current);
+        String ret = obj.dry(iceP_mode, current);
         com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        ostr.writeBool(ret);
+        ostr.writeString(ret);
         inS.endWriteParams(ostr);
         return inS.setResult(ostr);
     }
@@ -132,8 +97,6 @@ public interface WashingMachine extends com.zeroc.Ice.Object
         "ice_ids",
         "ice_isA",
         "ice_ping",
-        "isDone",
-        "takeWashedClothesAfterTime",
         "wash"
     };
 
@@ -171,14 +134,6 @@ public interface WashingMachine extends com.zeroc.Ice.Object
                 return com.zeroc.Ice.Object._iceD_ice_ping(this, in, current);
             }
             case 5:
-            {
-                return _iceD_isDone(this, in, current);
-            }
-            case 6:
-            {
-                return _iceD_takeWashedClothesAfterTime(this, in, current);
-            }
-            case 7:
             {
                 return _iceD_wash(this, in, current);
             }

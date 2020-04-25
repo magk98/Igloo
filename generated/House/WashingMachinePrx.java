@@ -17,74 +17,40 @@ package House;
 
 public interface WashingMachinePrx extends com.zeroc.Ice.ObjectPrx
 {
-    default void wash(String mode)
+    default Cloth[] wash(String mode, Cloth[] clothes)
     {
-        wash(mode, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return wash(mode, clothes, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void wash(String mode, java.util.Map<String, String> context)
+    default Cloth[] wash(String mode, Cloth[] clothes, java.util.Map<String, String> context)
     {
-        _iceI_washAsync(mode, context, true).waitForResponse();
+        return _iceI_washAsync(mode, clothes, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> washAsync(String mode)
+    default java.util.concurrent.CompletableFuture<Cloth[]> washAsync(String mode, Cloth[] clothes)
     {
-        return _iceI_washAsync(mode, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+        return _iceI_washAsync(mode, clothes, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> washAsync(String mode, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<Cloth[]> washAsync(String mode, Cloth[] clothes, java.util.Map<String, String> context)
     {
-        return _iceI_washAsync(mode, context, false);
+        return _iceI_washAsync(mode, clothes, context, false);
     }
 
     /**
      * @hidden
      * @param iceP_mode -
+     * @param iceP_clothes -
      * @param context -
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_washAsync(String iceP_mode, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<Cloth[]> _iceI_washAsync(String iceP_mode, Cloth[] iceP_clothes, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "wash", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
-                     ostr.writeString(iceP_mode);
-                 }, null);
-        return f;
-    }
-
-    default Cloth[] takeWashedClothesAfterTime(int minutes)
-    {
-        return takeWashedClothesAfterTime(minutes, com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default Cloth[] takeWashedClothesAfterTime(int minutes, java.util.Map<String, String> context)
-    {
-        return _iceI_takeWashedClothesAfterTimeAsync(minutes, context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<Cloth[]> takeWashedClothesAfterTimeAsync(int minutes)
-    {
-        return _iceI_takeWashedClothesAfterTimeAsync(minutes, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<Cloth[]> takeWashedClothesAfterTimeAsync(int minutes, java.util.Map<String, String> context)
-    {
-        return _iceI_takeWashedClothesAfterTimeAsync(minutes, context, false);
-    }
-
-    /**
-     * @hidden
-     * @param iceP_minutes -
-     * @param context -
-     * @param sync -
-     * @return -
-     **/
-    default com.zeroc.IceInternal.OutgoingAsync<Cloth[]> _iceI_takeWashedClothesAfterTimeAsync(int iceP_minutes, java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<Cloth[]> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "takeWashedClothesAfterTime", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<Cloth[]> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "wash", null, sync, null);
         f.invoke(true, context, null, ostr -> {
-                     ostr.writeInt(iceP_minutes);
+                     ostr.writeString(iceP_mode);
+                     ClothesHelper.write(ostr, iceP_clothes);
                  }, istr -> {
                      Cloth[] ret;
                      ret = ClothesHelper.read(istr);
@@ -93,22 +59,22 @@ public interface WashingMachinePrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default void dry(String mode)
+    default String dry(String mode)
     {
-        dry(mode, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+        return dry(mode, com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default void dry(String mode, java.util.Map<String, String> context)
+    default String dry(String mode, java.util.Map<String, String> context)
     {
-        _iceI_dryAsync(mode, context, true).waitForResponse();
+        return _iceI_dryAsync(mode, context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<Void> dryAsync(String mode)
+    default java.util.concurrent.CompletableFuture<java.lang.String> dryAsync(String mode)
     {
         return _iceI_dryAsync(mode, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<Void> dryAsync(String mode, java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.String> dryAsync(String mode, java.util.Map<String, String> context)
     {
         return _iceI_dryAsync(mode, context, false);
     }
@@ -120,47 +86,14 @@ public interface WashingMachinePrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_dryAsync(String iceP_mode, java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.String> _iceI_dryAsync(String iceP_mode, java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "dry", null, sync, null);
-        f.invoke(false, context, null, ostr -> {
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "dry", null, sync, null);
+        f.invoke(true, context, null, ostr -> {
                      ostr.writeString(iceP_mode);
-                 }, null);
-        return f;
-    }
-
-    default boolean isDone()
-    {
-        return isDone(com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default boolean isDone(java.util.Map<String, String> context)
-    {
-        return _iceI_isDoneAsync(context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<java.lang.Boolean> isDoneAsync()
-    {
-        return _iceI_isDoneAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<java.lang.Boolean> isDoneAsync(java.util.Map<String, String> context)
-    {
-        return _iceI_isDoneAsync(context, false);
-    }
-
-    /**
-     * @hidden
-     * @param context -
-     * @param sync -
-     * @return -
-     **/
-    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Boolean> _iceI_isDoneAsync(java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<java.lang.Boolean> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "isDone", null, sync, null);
-        f.invoke(true, context, null, null, istr -> {
-                     boolean ret;
-                     ret = istr.readBool();
+                 }, istr -> {
+                     String ret;
+                     ret = istr.readString();
                      return ret;
                  });
         return f;

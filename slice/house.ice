@@ -43,10 +43,8 @@ module House{
   };
 
   interface WashingMachine{
-    void wash(string mode);
-    Clothes takeWashedClothesAfterTime(int minutes);
-    void dry(string mode);
-    bool isDone();
+    Clothes wash(string mode, Clothes clothes);
+    string dry(string mode);
   };
 
 };

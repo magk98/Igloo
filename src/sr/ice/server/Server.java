@@ -8,10 +8,7 @@ package sr.ice.server;
 //
 // **********************************************************************
 
-import House.Fridge;
-import House.MyHouse;
-import House.SuperTempSensor;
-import House.TempSensor;
+import House.*;
 import com.zeroc.Ice.Communicator;
 import com.zeroc.Ice.Util;
 import com.zeroc.Ice.ObjectAdapter;
@@ -33,11 +30,12 @@ public class Server
 			ObjectAdapter adapter = communicator.createObjectAdapterWithEndpoints("Adapter1", "tcp -h localhost -p 10000:udp -h localhost -p 10000");
 
 			// 3. Stworzenie serwanta/serwant�w
-			String devices[] = {"fridge", "basic temperature sensor", "super temperature sensor"};
+			String[] devices = {"fridge", "basic temperature sensor", "super temperature sensor"};
 			MyHouse house = new MyHouse(devices, 22);
 			TempSensor tempServant = new TempSensorI(house);
 			SuperTempSensor superTempServant = new SuperTempSensorI(house);
 			Fridge fridgeServant1 = new FridgeI(10);
+			WashingMachine washingMachineServant = new WashingMachineI();
 
 			//próba implementacji servant locatora -> not working yet
 			//MyServantLocator sl = new MyServantLocator();
@@ -49,6 +47,7 @@ public class Server
 			adapter.add(tempServant, new Identity("tempBasic", "temp"));
 			adapter.add(superTempServant, new Identity("tempSuper", "temp"));
 	        adapter.add(fridgeServant1, new Identity("fridge1", "fridge"));
+	        adapter.add(washingMachineServant, new Identity("wm1", "wm"));
 
 	        
 			// 5. Aktywacja adaptera i przej�cie w p�tl� przetwarzania ��da�
@@ -61,7 +60,7 @@ public class Server
 		}
 		catch (Exception e)
 		{
-			System.err.println(e);
+			e.getMessage();
 			status = 1;
 		}
 		if (communicator != null)

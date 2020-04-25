@@ -4,29 +4,35 @@ import House.Fridge;
 import com.zeroc.Ice.Current;
 
 public class FridgeI implements Fridge {
-    final int maxTemp = 15;
-    final int minTemp = -15;
-    int fridgeTemp;
+    private int fridgeTemp;
 
-    public FridgeI(int fridgeTemp){
+    FridgeI(int fridgeTemp){
         this.fridgeTemp = fridgeTemp;
     }
 
 
     @Override
     public int cool(Current current) {
-        this.fridgeTemp--;
+        int minTemp = -15;
+        if (this.fridgeTemp - 1 > minTemp)
+            this.fridgeTemp--;
+        else
+            System.out.println("Cannot decrease fridge temperature more");
         return this.fridgeTemp;
     }
 
     @Override
     public int heat(Current current) {
-        this.fridgeTemp++;
+        int maxTemp = 15;
+        if (this.fridgeTemp + 1 < maxTemp)
+            this.fridgeTemp++;
+        else
+            System.out.println("Cannot increase fridge temperature more");
         return this.fridgeTemp;
     }
 
     @Override
-    public int showTemperature( com.zeroc.Ice.Current current){
+    public int showTemperature(com.zeroc.Ice.Current current){
         return this.fridgeTemp;
     }
 
