@@ -5,9 +5,9 @@ import House.TempSensor;
 import com.zeroc.Ice.Current;
 
 public class TempSensorI implements TempSensor {
-    public MyHouse myHouse;
+    public MyHouseSingleton myHouse;
 
-    public TempSensorI(MyHouse myHouse){
+    public TempSensorI(MyHouseSingleton myHouse){
         this.myHouse = myHouse;
     }
 

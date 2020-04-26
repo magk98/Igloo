@@ -5,10 +5,9 @@ import House.SuperTempSensor;
 import com.zeroc.Ice.Current;
 
 public class SuperTempSensorI implements SuperTempSensor {
-    private MyHouse myHouse;
-    private String unit = "C";
+    private MyHouseSingleton myHouse;
 
-    SuperTempSensorI(MyHouse myHouse){
+    SuperTempSensorI(MyHouseSingleton myHouse){
         this.myHouse = myHouse;
     }
 
@@ -31,18 +30,18 @@ public class SuperTempSensorI implements SuperTempSensor {
 
     @Override
     public String showUnit(Current current) {
-        return this.unit;
+        return myHouse.unit;
     }
 
     @Override
     public void changeTempUnit(Current current) {
-        if(unit.equals("C")){
-            unit = "F";
+        if(myHouse.unit.equals("C")){
+            myHouse.unit = "F";
             this.myHouse.temperature = 2 * this.myHouse.temperature + 32;
             return;
         }
-        if(unit.equals("F")){
-            unit = "C";
+        if(myHouse.unit.equals("F")){
+            myHouse.unit = "C";
             this.myHouse.temperature = (this.myHouse.temperature - 32) / 2;
         }
     }

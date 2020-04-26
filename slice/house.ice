@@ -34,6 +34,11 @@ module House{
     int measure();
   };
 
+  interface BetterTempSensor{
+    int measure();
+    string showFormula();
+  }
+
   interface SuperTempSensor{
     int measure();
     int heatHouse(int temp);

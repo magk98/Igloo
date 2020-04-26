@@ -9,13 +9,15 @@ fun main(args: Array<String>){
     var status = 0
     val communicator: Communicator = Util.initialize(args)
     val baseFridge = communicator.stringToProxy("fridge/fridge1:tcp -h localhost -p 10000")
-    val baseTemp = communicator.stringToProxy("temp/tempBasic:tcp -h localhost -p 10000")
-    val superTemp = communicator.stringToProxy("temp/tempSuper:tcp -h localhost -p 10000")
+    val baseTemp = communicator.stringToProxy("Temp/tempBasic:tcp -h localhost -p 10000")
+    val superTemp = communicator.stringToProxy("superTemp/tempSuper:tcp -h localhost -p 10000")
     val wm = communicator.stringToProxy("wm/wm1:tcp -h localhost -p 10000")
+
     val fridgePrx: FridgePrx = FridgePrx.checkedCast(baseFridge)?: throw Error("Invalid proxy - fridge")
     val tempPrx = TempSensorPrx.checkedCast(baseTemp)?: throw Error("Invalid proxy - temp sensor")
     val superTempPrx = SuperTempSensorPrx.checkedCast(superTemp)?: throw Error("Invalid proxy - super temp sensor")
     val washingMachinePrx = WashingMachinePrx.checkedCast(wm)?: throw Error("Invalid proxy - washing machine")
+
     print("==> ")
     var line = readLine()
     while(line != "x"){
