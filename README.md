@@ -1,5 +1,6 @@
 # Igloo
 Code for DS labs, smart house using ZerocIce
+
 Smart house simulation in Java & Kotlin using Zeroc Ice. Supported devices and their functionalities
 - Fridge: "cool" -> increasing fridge temperature by 1 C, "heat" -> decreasing fridge temperature by 1 C, "fridgeT" -> displaying fridge current temperature
 - temperature sensor: "houseH" -> displaying house temperature in C
