@@ -1,6 +1,5 @@
 package sr.ice.server;
 
-import House.MyHouse;
 import House.SuperTempSensor;
 import com.zeroc.Ice.Current;
 

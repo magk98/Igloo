@@ -33,12 +33,6 @@ public class Server
 			MyHouseSingleton house = MyHouseSingleton.getInstance();
 			adapter.addServantLocator(new MyServantLocator(), "");
 
-			/*TempSensor tempServant = new TempSensorI(house);
-			SuperTempSensor superTempServant = new SuperTempSensorI(house);
-			Fridge fridgeServant1 = new FridgeI(10);
-			WashingMachine washingMachineServant = new WashingMachineI();
-			 */
-
 			// 5. Aktywacja adaptera i przej�cie w p�tl� przetwarzania ��da�
 			adapter.activate();
 			

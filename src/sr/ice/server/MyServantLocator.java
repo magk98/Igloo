@@ -8,19 +8,30 @@ import com.zeroc.Ice.UserException;
 public class MyServantLocator implements ServantLocator {
     @Override
     public LocateResult locate(Current current) throws UserException {
-        switch (current.id.category) {
-            case "fridge":
-                return new LocateResult(new FridgeI(5), null);
-            case "wm":
-                return new LocateResult(new WashingMachineI(), null);
-            case "superTemp":
-                return new LocateResult(new SuperTempSensorI(MyHouseSingleton.getInstance()), null);
-            case "Temp":
-                return new LocateResult(new TempSensorI(MyHouseSingleton.getInstance()), null);
-            case "betterTemp":
-                return new LocateResult(new BetterTempSensorI(MyHouseSingleton.getInstance()), null);
+        ServantLocator.LocateResult r = new ServantLocator.LocateResult();
+        com.zeroc.Ice.Object servant = current.adapter.find(current.id);
+
+        if(servant == null) {
+            switch (current.id.category) {
+                case "fridge":
+                    servant = new FridgeI(5);
+                    break;
+                case "wm":
+                    servant = new WashingMachineI();
+                    break;
+                case "superTemp":
+                    servant = new SuperTempSensorI(MyHouseSingleton.getInstance());
+                    break;
+                case "Temp":
+                    servant = new TempSensorI(MyHouseSingleton.getInstance());
+                    break;
+                case "betterTemp":
+                    servant = new BetterTempSensorI(MyHouseSingleton.getInstance());
+            }
+            current.adapter.add(servant, current.id);
         }
-        return new LocateResult();
+        r.returnValue = servant;
+        return r;
     }
 
     @Override
@@ -30,6 +41,5 @@ public class MyServantLocator implements ServantLocator {
 
     @Override
     public void finished(com.zeroc.Ice.Current current, com.zeroc.Ice.Object servant, java.lang.Object cookie) throws UserException {
-        System.out.println(1);
     }
 }

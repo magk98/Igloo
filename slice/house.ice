@@ -35,8 +35,7 @@ module House{
   };
 
   interface BetterTempSensor{
-    int measure();
-    string showFormula();
+    string measure();
   }
 
   interface SuperTempSensor{

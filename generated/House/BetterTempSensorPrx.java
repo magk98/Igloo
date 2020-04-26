@@ -17,22 +17,22 @@ package House;
 
 public interface BetterTempSensorPrx extends com.zeroc.Ice.ObjectPrx
 {
-    default int measure()
+    default String measure()
     {
         return measure(com.zeroc.Ice.ObjectPrx.noExplicitContext);
     }
 
-    default int measure(java.util.Map<String, String> context)
+    default String measure(java.util.Map<String, String> context)
     {
         return _iceI_measureAsync(context, true).waitForResponse();
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> measureAsync()
+    default java.util.concurrent.CompletableFuture<java.lang.String> measureAsync()
     {
         return _iceI_measureAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
     }
 
-    default java.util.concurrent.CompletableFuture<java.lang.Integer> measureAsync(java.util.Map<String, String> context)
+    default java.util.concurrent.CompletableFuture<java.lang.String> measureAsync(java.util.Map<String, String> context)
     {
         return _iceI_measureAsync(context, false);
     }
@@ -43,46 +43,9 @@ public interface BetterTempSensorPrx extends com.zeroc.Ice.ObjectPrx
      * @param sync -
      * @return -
      **/
-    default com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> _iceI_measureAsync(java.util.Map<String, String> context, boolean sync)
+    default com.zeroc.IceInternal.OutgoingAsync<java.lang.String> _iceI_measureAsync(java.util.Map<String, String> context, boolean sync)
     {
-        com.zeroc.IceInternal.OutgoingAsync<java.lang.Integer> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "measure", null, sync, null);
-        f.invoke(true, context, null, null, istr -> {
-                     int ret;
-                     ret = istr.readInt();
-                     return ret;
-                 });
-        return f;
-    }
-
-    default String showFormula()
-    {
-        return showFormula(com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default String showFormula(java.util.Map<String, String> context)
-    {
-        return _iceI_showFormulaAsync(context, true).waitForResponse();
-    }
-
-    default java.util.concurrent.CompletableFuture<java.lang.String> showFormulaAsync()
-    {
-        return _iceI_showFormulaAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<java.lang.String> showFormulaAsync(java.util.Map<String, String> context)
-    {
-        return _iceI_showFormulaAsync(context, false);
-    }
-
-    /**
-     * @hidden
-     * @param context -
-     * @param sync -
-     * @return -
-     **/
-    default com.zeroc.IceInternal.OutgoingAsync<java.lang.String> _iceI_showFormulaAsync(java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<java.lang.String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "showFormula", null, sync, null);
+        com.zeroc.IceInternal.OutgoingAsync<java.lang.String> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "measure", null, sync, null);
         f.invoke(true, context, null, null, istr -> {
                      String ret;
                      ret = istr.readString();

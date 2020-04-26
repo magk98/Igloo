@@ -6,19 +6,26 @@ import com.zeroc.Ice.Current;
 
 public class BetterTempSensorI implements BetterTempSensor {
     private MyHouseSingleton myHouse;
-    private String unit = "C";
 
     BetterTempSensorI(MyHouseSingleton myHouse){
         this.myHouse = myHouse;
     }
 
     @Override
-    public int measure(Current current) {
-        return myHouse.temperature;
+    public String measure(Current current) {
+        String result = "";
+        int temp;
+        if(myHouse.unit.equals("C")){
+            result += "Temperatura wynosi: " + myHouse.temperature + " C, ";
+            temp = 2 * this.myHouse.temperature + 32;
+            result += temp + " F";
+        }
+        if(myHouse.unit.equals("F")){
+            result += "Temperatura wynosi: " + myHouse.temperature + " F, ";
+            temp = (this.myHouse.temperature - 32) / 2;
+            result += temp + " C";
+        }
+        return result;
     }
 
-    @Override
-    public String showFormula(Current current) {
-        return null;
-    }
 }
